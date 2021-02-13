@@ -24,13 +24,13 @@ const onAdded = (timeslot) => {
   var startDate = ts.startDate;
   var endDate = ts.endDate;
   var data = {
+    startDate: startDate.toString(),
+    endDate: endDate.toString(),
     title: title,
     description: description,
-    startDate: startDate,
-    endDate: endDate,
   };
   console.log(`${title} ${description} ${startDate} ${endDate}`);
-  const newSlotRef = firebase.database().ref("New Slot");
+  const newSlotRef = firebase.database().ref("db/user1232");
   newSlotRef.push(data);
 };
 
@@ -42,7 +42,12 @@ const onUpdate = (timeslot) => {
   console.log("Update!");
 };
 
-const retrieve = () => {};
+const retrieve = () => {
+  const freeSlotRef = firebase.database().ref("db/user1232");
+  freeSlotRef.on("value", (snapshot) => {
+    console.log(snapshot.val());
+  });
+};
 
 class App extends React.Component {
   constructor() {
@@ -74,7 +79,7 @@ class App extends React.Component {
           crossScrollingEnabled={true}
           onAppointmentAdded={onAdded}
           onAppointmentDeleted={onDelete}
-          onAppointmentUpdated={onUpdate}
+          onAppointmentUpdated={retrieve}
         >
           <Resource
             fieldExpr="priorityId"
