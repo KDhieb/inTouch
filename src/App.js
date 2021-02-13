@@ -13,6 +13,14 @@ import {
   Friends
 } from './pages';
 
+import config from './config';
+import Firebase from 'firebase';
+Firebase.initializeApp(config.firebaseConfig)
+
+Firebase.database().ref('/').set('test');
+console.log('DATA SAVED');
+
+
 function App() {
   return (
     <Router>
