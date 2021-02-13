@@ -12,22 +12,25 @@ import {
   SignUp,
   Friends
 } from './pages';
+import UserProvider from "./providers/UserProvider";
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/sign-up">
-          <SignUp />
-        </Route>
-        <Route path="/friends">
-          <Friends />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Switch>
+          <Route path="/sign-up">
+            <SignUp />
+          </Route>
+          <Route path="/friends">
+            <Friends />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </UserProvider>
   );
 }
 
