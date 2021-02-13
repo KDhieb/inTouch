@@ -6,10 +6,25 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "devexpress-diagram": "2.0.11",
+    "devexpress-gantt": "2.0.18",
+    "devextreme": "20.2.5",
+    "devextreme-quill": "0.9.8",
+    "devextreme-react": "20.2.5",
+    "es6-object-assign": "1.1.0",
+    "jszip": "3.5.0",
+    "luxon": "1.25.0",
+    "preact": "10.5.11",
+    "prop-types": "15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
-    "web-vitals": "^1.0.1"
+    "rrule": "2.6.6",
+    "web-vitals": "^1.0.1",
+    "whatwg-fetch": "2.0.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
