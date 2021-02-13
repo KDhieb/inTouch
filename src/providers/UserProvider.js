@@ -7,8 +7,10 @@ export default (props) => {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const { displayName, email }  = user;
+        console.log('THIS IS USER', user);
+        const { displayName, email, uid }  = user;
         setuser({
+          uid,
           displayName,
           email
         })
