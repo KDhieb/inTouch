@@ -19,26 +19,6 @@ export default function Home() {
     <div>
       This is home
       <button onClick={logOut}>logout</button>
-{/*  */}
-      {/* <button 
-         onClick={() => { 
-          const googleAuth = new firebase.auth.GoogleAuthProvider(); 
-          firebase.auth().signInWithPopup(googleAuth);
-          firebase.auth()
-            .getRedirectResult()
-            .then((result) => {
-              if (result.credential) {
-                var credential = result.credential;
-                var token = credential.accessToken;
-              }
-              
-              var user = result.user;
-            }).catch((error) => {
-              console.log(error)
-            });
-          }} > 
-          Sign in with Google 
-        </button> */}
     </div>    
   )
 }
