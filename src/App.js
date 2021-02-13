@@ -9,7 +9,8 @@ import {
 import {
   Home,
   SignIn,
-  Friends
+  Friends,
+  Dashboard
 } from './pages';
 import UserProvider from "./providers/UserProvider";
 
@@ -30,6 +31,9 @@ function App() {
           </Route>
           <Route path="/friends">
             <Friends />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
           </Route>
           <Route path="/">
             <Home />
