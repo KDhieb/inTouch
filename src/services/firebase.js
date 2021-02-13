@@ -7,10 +7,17 @@ dotenv.config();
 firebase.initializeApp(config.firebaseConfig);
 
 export const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider()
+const googleAuth = new firebase.auth.GoogleAuthProvider()
 export const signInWithGoogle = () => {
-  auth.signInWithPopup(googleProvider).then((res) => {
-    console.log(res.user)
+  auth.signInWithPopup(googleAuth)
+  .then((result) => {
+    if (result.credential) {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+      var token = credential.accessToken;
+    }
+    var user = result.user;
+    console.log(user);
   }).catch((error) => {
     console.log(error.message)
   })
@@ -23,6 +30,3 @@ export const logOut = () => {
     console.log(error.message)
   })
 }
-
-firebase.database().ref('/').set('test');
-console.log('DATA SAVED');
