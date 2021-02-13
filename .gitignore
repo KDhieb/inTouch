@@ -18,6 +18,10 @@
 .env.test.local
 .env.production.local
 .env
+credentials.json
+
+/backend/.env
+/backend/node_modules
 
 
 npm-debug.log*
