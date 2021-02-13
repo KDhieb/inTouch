@@ -16,7 +16,9 @@ export default function Profile() {
   useEffect(() => {
     userRef.on('value', (user) => {
       const data = user.val();
-      setInterests(data.interests);
+      if (data.interests) {
+        setInterests(data.interests);
+      }
       // console.log('USER DATA', data);
     })
   }, []);
@@ -49,7 +51,8 @@ export default function Profile() {
   const removeInterest = (index) => {
     const newInterests = JSON.parse(JSON.stringify(interests));
     newInterests.splice(index, 1);
-    userRef.child('interests').child(index).remove();
+    userRef.child('interests').remove();
+    userRef.child('interests').set(newInterests)
     setInterests(newInterests);
   }
   
