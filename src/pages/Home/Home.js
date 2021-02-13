@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useEffect, useContext, useState } from "react";
 import classes from './Home.module.css';
-import firebase from "firebase";
+import { UserContext } from "../../providers/UserProvider";
+import { useHistory } from 'react-router-dom';
+import { logOut } from "../../services/firebase";
+// import firebase from "firebase";
 
 export default function Home() {
+  const user = useContext(UserContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!user) {
+      history.push('/sign-in');
+    }
+  }, [user]);
+
   return (
     <div>
-      <button 
+      This is home
+      <button onClick={logOut}>logout</button>
+{/*  */}
+      {/* <button 
          onClick={() => { 
           const googleAuth = new firebase.auth.GoogleAuthProvider(); 
           firebase.auth().signInWithPopup(googleAuth);
@@ -13,7 +28,6 @@ export default function Home() {
             .getRedirectResult()
             .then((result) => {
               if (result.credential) {
-                /** @type {firebase.auth.OAuthCredential} */
                 var credential = result.credential;
                 var token = credential.accessToken;
               }
@@ -24,7 +38,7 @@ export default function Home() {
             });
           }} > 
           Sign in with Google 
-        </button>
+        </button> */}
     </div>    
   )
 }
