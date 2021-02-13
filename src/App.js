@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+import firebase from "./services/firebase";
 
 import "whatwg-fetch";
 import Switch from "devextreme-react/switch";
@@ -18,24 +19,30 @@ const groups = ["priorityId"];
 
 const onAdded = (timeslot) => {
   var ts = timeslot.appointmentData;
-
   var title = ts.text;
   var description = ts.description;
   var startDate = ts.startDate;
   var endDate = ts.endDate;
-
   var data = {
     title: title,
     description: description,
     startDate: startDate,
     endDate: endDate,
   };
-
-  console.log(`${title} ${description} ${startDate} ${endDate} `);
-  // console.log(object.appointmentData);
-  // console.log(object.appointmentData.text);
-  // console.log("its working");
+  console.log(`${title} ${description} ${startDate} ${endDate}`);
+  const newSlotRef = firebase.database().ref("New Slot");
+  newSlotRef.push(data);
 };
+
+const onDelete = (timeslot) => {
+  console.log("delete!");
+};
+
+const onUpdate = (timeslot) => {
+  console.log("Update!");
+};
+
+const retrieve = () => {};
 
 class App extends React.Component {
   constructor() {
@@ -66,6 +73,8 @@ class App extends React.Component {
           endDayHour={24}
           crossScrollingEnabled={true}
           onAppointmentAdded={onAdded}
+          onAppointmentDeleted={onDelete}
+          onAppointmentUpdated={onUpdate}
         >
           <Resource
             fieldExpr="priorityId"
