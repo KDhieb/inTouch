@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import { UserContext } from "../../providers/UserProvider";
 import { useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
+import Calendar from '../../components/Calendar/Calendar';
 
 export default function Dashboard() {
   const user = useContext(UserContext);
@@ -16,7 +17,7 @@ export default function Dashboard() {
   return (
     <div>
       <Navbar />
-      <h1>Dashboard</h1>
+      <Calendar/>
     </div>
   )
 }
