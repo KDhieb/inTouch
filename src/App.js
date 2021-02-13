@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -13,6 +12,14 @@ import {
   Friends
 } from './pages';
 import UserProvider from "./providers/UserProvider";
+
+// import config from './services/config';
+// import Firebase from 'firebase';
+// Firebase.initializeApp(config.firebaseConfig)
+
+// Firebase.database().ref('/').set('test');
+// console.log('DATA SAVED');
+
 
 function App() {
   return (
