@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import classes from './Interests.module.css';
-import cancel from './cancel.svg';
+import cancel from '../../static/cancel.svg';
 import { UserContext } from '../../providers/UserProvider';
 import { useHistory } from 'react-router-dom';
 import { database } from '../../services/firebase';
