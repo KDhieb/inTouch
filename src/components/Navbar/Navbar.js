@@ -24,12 +24,17 @@ export default function Navbar() {
     history.push('/friends');
   }
 
+  const toProfile = () => {
+    history.push('/profile');
+  }
+
   return (
     <div className={ classes.container }>
       <h1 className={ classes.logo } onClick={ toHome }>inTouch</h1>
       <div className={ classes.rightNav }>
         { user && <h3 className={ classes.navDB } onClick={ toDashboard }>Dashboard</h3> }
         { user && <h3 className={ classes.nav } onClick={ toFriends }>Friends</h3> }
+        { user && <h3 className={ classes.nav } onClick={ toProfile }>Profile</h3> }
         { user && <h3 className={ classes.user }>Hi, { user.displayName }!</h3> }
         <div className={ classes.buttons }>
           {
