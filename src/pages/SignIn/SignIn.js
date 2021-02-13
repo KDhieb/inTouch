@@ -10,7 +10,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (user) {
-      history.push('/dashboard');
+      history.push('/interests');
     }
   }, [user]);
 
