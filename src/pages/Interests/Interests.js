@@ -3,20 +3,21 @@ import classes from './Interests.module.css';
 import cancel from './cancel.svg';
 import { UserContext } from '../../providers/UserProvider';
 import { useHistory } from 'react-router-dom';
+import { database } from '../../services/firebase';
 
 export default function Interests() {
-  // const user = useContext(UserContext);
+  const user = useContext(UserContext);
   const history = useHistory();
   const [interest, setInterest] = useState('');
   const [interests, setInterests] = useState([]);
   const [isHover, setIsHover] = useState(false);
   const [currIndex, setCurrIndex] = useState(null);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     history.push('/sign-in');
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (!user) {
+      history.push('/sign-in');
+    }
+  }, [user]);
 
   const onInterestChange = (event) => {
     setInterest(event.target.value);
@@ -49,6 +50,11 @@ export default function Interests() {
   }
 
   const toDashboard = () => {
+    database.ref(`/${user.uid}`).set({
+      email: user.email,
+      name: user.displayName,
+      interests
+    });
     history.push('/dashboard');
   }
 
