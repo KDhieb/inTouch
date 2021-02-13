@@ -8,7 +8,9 @@ import {
 } from 'react-router-dom';
 import {
   Home,
+  Interests,
   SignIn,
+  Profile,
   Friends,
   Dashboard
 } from './pages';
@@ -28,6 +30,12 @@ function App() {
         <Switch>
           <Route path="/sign-in">
             <SignIn />
+          </Route>
+          <Route path="/interests">
+            <Interests />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/friends">
             <Friends />
