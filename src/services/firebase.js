@@ -9,7 +9,8 @@ firebase.initializeApp(config.firebaseConfig);
 export const auth = firebase.auth();
 const googleAuth = new firebase.auth.GoogleAuthProvider()
 export const signInWithGoogle = () => {
-  auth.signInWithPopup(googleAuth)
+  auth.signInWithPopup(googleAuth);
+  auth.getRedirectResult()
   .then((result) => {
     if (result.credential) {
       /** @type {firebase.auth.OAuthCredential} */
