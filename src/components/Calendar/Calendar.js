@@ -6,7 +6,7 @@ import Switch from "devextreme-react/switch";
 import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { slotType, eventType } from "./data.js";
 import CustomStore from "devextreme/data/custom_store";
-import * as AspNetData from "devextreme-aspnet-data-nojquery";
+// import * as AspNetData from "devextreme-aspnet-data-nojquery";
 import { UserContext } from "../../providers/UserProvider";
 
 function Calendar() {
