@@ -7,6 +7,12 @@ import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { data, priorityData } from "./data.js";
 import CustomStore from "devextreme/data/custom_store";
 
+const store = new CustomStore({
+  // ...
+  onUpdating: function (key, values) {
+    // Your code goes here
+  },
+});
 const dataObject = {};
 // const currentDate = new Date();
 
@@ -67,57 +73,66 @@ const onDelete = (timeslot) => {
   });
 };
 
-// let oldStartDateForUpdate;
-// let oldendDateForUpdate;
+const update = async (object) => {
+  var promise = new Promise((resolve, reject) => {
+    let oldData = object.oldData;
+    let newData = object.newData;
 
-// const storeUnchangedSlot = (object) => {
-//   var ts = object.oldData;
-//   oldStartDateForUpdate = ts.startDate;
-//   oldendDateForUpdate = ts.endDate;
-// };
-
-const updateTest = (object) => {
-  console.log(object);
-};
-
-const update = (object) => {
-  var ts = object.oldData;
-  let oldStartDateForUpdate = ts.startDate;
-  let oldendDateForUpdate = ts.endDate;
-
-  var title = object.text;
-  var description = object.description;
-  var startDate = object.startDate;
-  var endDate = object.endDate;
-
-  var data = {
-    startDate: startDate.toString(),
-    endDate: endDate.toString(),
-    title: title,
-    description: description,
-  };
-
-  var query = firebase.database().ref(`${userId}/freeSlots`).orderByKey();
-
-  query.once("value").then(function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-      var key = childSnapshot.key;
-      var childData = childSnapshot.val();
-      // console.log("----------");
-      // console.log(
-      //   `Key: ${key} start: ${childData.startDate} end: ${childData.endDate}`
-      // );
-      if (
-        oldStartDateForUpdate.toString() === childData.startDate.toString() &&
-        oldendDateForUpdate.toString() === childData.endDate.toString()
-      ) {
-        console.log("Reached");
-        console.log(data.description);
-        firebase.database().ref(`${userId}/freeSlots`).child(key).update(data);
-        return true; // break out of loop
-      }
-    });
+    resolve({ oldData, newData });
   });
+
+  promise
+    .then((obj) => {
+      console.log(obj);
+      console.log("first .then");
+      let oldData = obj.oldData;
+      let newData = obj.newData;
+
+      let prevStartDate = oldData.startDate.toString();
+      let prevEndDate = oldData.endDate.toString();
+
+      var data = {
+        startDate: newData.startDate.toString(),
+        endDate: newData.endDate.toString(),
+        title: newData.text,
+        description: newData.description,
+      };
+
+      return { data, prevStartDate, prevEndDate };
+    })
+    .then(async (dataObj) => {
+      console.log("is it working at this point");
+      var query = await firebase
+        .database()
+        .ref(`${userId}/freeSlots`)
+        .orderByKey();
+
+      query.once("value").then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+          console.log(key);
+          console.log("-----");
+          console.log(dataObj.prevEndDate.toString());
+          console.log(childData.endDate.toString());
+
+          if (
+            dataObj.prevStartDate.toString() ===
+              childData.startDate.toString() &&
+            dataObj.prevEndDate.toString() === childData.endDate.toString()
+          ) {
+            console.log("Reached");
+            console.log(dataObj.data.title);
+            firebase
+              .database()
+              .ref(`${userId}/freeSlots`)
+              .child(key)
+              .update(JSON.parse(JSON.stringify(dataObj.data)));
+            return true; // break out of loop
+          }
+        });
+      });
+    });
 };
 
 const retrieve = () => {
