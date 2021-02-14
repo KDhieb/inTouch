@@ -68,7 +68,7 @@ function Calendar() {
 
   // console.log(newSource);
 
-  const currentDate = new Date(2021, 4, 21);
+  const currentDate = new Date();
 
   console.log(currentDate);
   const views = ["week"];
@@ -76,7 +76,7 @@ function Calendar() {
   const addNewSlot = (timeslot) => {
     var ts = timeslot.appointmentData;
     var text = ts.text;
-    var description = ts.description;
+    var description = ts.description || "No description";
     var startDate = ts.startDate;
     var endDate = ts.endDate;
     var eventTypeId = ts.eventTypeId;
@@ -92,7 +92,6 @@ function Calendar() {
       eventTypeId: eventTypeId,
     };
 
-    console.log(`${text} ${description} ${startDate} ${endDate}`);
     const newSlotRef = firebase.database().ref(`${userId}/freeSlots`);
     newSlotRef.push(newData);
 
@@ -211,12 +210,6 @@ function Calendar() {
         onAppointmentDeleted={onDelete}
         onAppointmentUpdating={update}
       >
-        <Resource
-          fieldExpr="sourceTypeId"
-          allowMultiple={false}
-          dataSource={slotType}
-          label="Source"
-        />
 
         <Resource
           fieldExpr="eventTypeId"
