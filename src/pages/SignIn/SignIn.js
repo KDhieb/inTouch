@@ -17,7 +17,7 @@ export default function SignUp() {
       userRef.get()
       .then((data) => {
         if (!data.val().interests) {
-          // console.log('USERRRR HERE!', data.val());
+          console.log('USERRRR HERE!', data.val());
           history.push('/interests');
         } else {
           history.push('/dashboard');
