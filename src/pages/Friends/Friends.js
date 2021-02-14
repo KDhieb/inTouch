@@ -17,6 +17,7 @@ export default function Friends() {
   const [friendsUid, setFriendsUid] = useState([]);
   const [friends, setFriends] = useState([]);
   const [inviteFriends, setInviteFriends] = useState([]);
+  const [canAddMore, setCanAddMore] = useState(false);
 
   // console.log(overlap(getTimes(["U2h82SJHjas91ASA", "K92jnsA8scjchaus8shf"])));
 
@@ -49,9 +50,11 @@ export default function Friends() {
       console.log(inviteFriends);
       async function fetchOverlap(){
         let details = await getTimes(inviteFriends)
-        let editArr = [...inviteFriends];
-        editArr.pop();
-        setInviteFriends(editArr);
+        if (!canAddMore) {
+          let editArr = [...inviteFriends];
+          let currUser = editArr[0];
+          setInviteFriends([currUser]);
+        }
         let overlaps = overlap(details[0]);
         console.log(overlaps.ranges);
         let display = overlaps.ranges.map((e) => {
@@ -85,7 +88,7 @@ export default function Friends() {
       }
       fetchOverlap();
     }
-  }, [inviteFriends]);
+  }, [inviteFriends, canAddMore]);
 
   useEffect(() => {
     if (friendsUid) {
@@ -156,6 +159,22 @@ export default function Friends() {
 
   let confirmTouchable = (title, startTime,endTime,emails) =>{
     createCalendarEvent(title, startTime,endTime,emails);
+    let newtouchable = touchable.filter((e) => {
+      if (e.title == title){
+        return false;
+      } else{
+        return true
+      }
+    })
+    console.log("New touchable", newtouchable) 
+    setTouchable(newtouchable);
+  }
+  const inviteMoreFriends = () => {
+    setCanAddMore(true);
+  }
+
+  const stopInviteMore = () => {
+    setCanAddMore(false);
   }
 
   return (
@@ -204,7 +223,13 @@ export default function Friends() {
         </div>
         <div className={classes.right}>
           <div className={classes.rightTop}>
-            <h2 className={classes.title}>Touchables</h2>
+            <div className={ classes.leftTop}>
+              <h2 className={classes.title}>Touchables</h2>
+              <div className={ classes.cont }>
+                {canAddMore && <button onClick={ stopInviteMore } className={ classes.doneBtn }>Done</button>}
+                <h2 className={ classes.plus } onClick={ inviteMoreFriends }>+</h2>
+              </div>
+            </div>
             {/* <div className={classes.addTouchableContainer}>
               <h4 className={classes.friendName}>Basketball with Jacky</h4>
               <h4 className={classes.friendName}>Dec 5 1997</h4>

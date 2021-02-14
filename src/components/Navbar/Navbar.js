@@ -38,7 +38,7 @@ export default function Navbar() {
       <h1 className={ classes.logo } onClick={ toHome }>inTouch</h1>
       <div className={ classes.rightNav }>
         { user && <h3 className={ classes.navDB } onClick={ toDashboard }>Dashboard</h3> }
-        { user && <h3 className={ classes.nav } onClick={ toFriends }>Network</h3> }
+        { user && <h3 className={ classes.nav } onClick={ toFriends }>Circle</h3> }
         { user && <h3 className={ classes.nav } onClick={ toProfile }>Profile</h3> }
         { user && <h3 className={ classes.user }>Hi, { user.displayName }!</h3> }
         <div className={ classes.buttons }>
