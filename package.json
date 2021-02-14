@@ -12,8 +12,12 @@
     "devextreme-aspnet-data-nojquery": "^2.8.0",
     "devextreme-quill": "0.9.8",
     "devextreme-react": "20.2.5",
+<<<<<<< HEAD
     "dompurify": "^2.2.6",
     "express": "^4.17.1",
+=======
+    "devextreme-aspnet-data-nojquery": "2.6.1",
+>>>>>>> 69f3611ae76b2d72a3ca3abb7319f79df3c8f119
     "firebase": "^8.2.7",
     "firebase-admin": "^9.5.0",
     "fs": "^0.0.1-security",
