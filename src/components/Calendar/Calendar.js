@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import firebase, { database } from "../../services/firebase";
-
 import "whatwg-fetch";
 import Switch from "devextreme-react/switch";
 import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { slotType, eventType } from "./data.js";
-import CustomStore from "devextreme/data/custom_store";
-import * as AspNetData from "devextreme-aspnet-data-nojquery";
 import { UserContext } from "../../providers/UserProvider";
+// import { getCalendars, createEvent } from "./GoogleCal";
 
 function Calendar() {
   const user = useContext(UserContext);
@@ -17,7 +15,26 @@ function Calendar() {
   if (user) {
     userId = user.uid;
   }
+
   const [newSource, setNewSource] = useState([]);
+
+  // const [googleCalData, setNewGoogleCalData] = useState([]);
+
+  // function getGoogleCalendarData() {
+  //   var request = require("request");
+  //   var options = {
+  //     method: "GET",
+  //     url: `http://b7d67b121fef.ngrok.io/getcalendars?access_token=${localStorage.getItem(
+  //       "token"
+  //     )}`,
+  //     headers: {},
+  //   };
+  //   request(options, function (error, response) {
+  //     if (error) throw new Error(error);
+  //     console.log(response.body);
+  //     setNewGoogleCalData(response.body.JSON);
+  //   });
+  // }
 
   function getFreeSlotData() {
     console.log("new source running again");
@@ -44,11 +61,12 @@ function Calendar() {
 
   useEffect(() => {
     getFreeSlotData();
+    // getGoogleCalendarData();
   }, []);
 
-  console.log("outside");
+  console.log("newsource");
 
-  console.log(newSource);
+  // console.log(newSource);
 
   const currentDate = new Date(2021, 4, 21);
 
