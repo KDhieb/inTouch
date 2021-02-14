@@ -154,13 +154,17 @@ export default function Friends() {
     setInviteFriends(newInvitees);
   }
 
+  let confirmTouchable = (title, startTime,endTime,emails) =>{
+    createCalendarEvent(title, startTime,endTime,emails);
+  }
+
   return (
     <div>
       <Navbar />
       <div className={classes.container}>
         <div className={classes.left}>
           <div className={classes.leftTop}>
-            <h2 className={classes.title}>Your Friends</h2>
+            <h2 className={classes.title}>Your circle</h2>
             {/* <h2 className={ classes.plus }>+</h2> */}
           </div>
           <div className={classes.addFriendContainer}>
@@ -226,7 +230,7 @@ export default function Friends() {
                       <p className={classes.touchTime}>{startDate}          {startTime}-{endTime}</p>
                       <h4 className={classes.touchTitle}>{touch.title}</h4>
                       <button 
-                        onClick={() => createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} 
+                        onClick={() => confirmTouchable(touch.title, touch.startTime, touch.endTime, touch.emails)} 
                         className={classes.inviteBtn}
                       >
                         Send invite
