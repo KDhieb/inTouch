@@ -4,22 +4,14 @@ import Navbar from "../../components/Navbar/Navbar";
 import { UserContext } from "../../providers/UserProvider";
 import { database } from "../../services/firebase";
 import { getTimes, overlap } from "../../components/Calendar/algo";
-<<<<<<< HEAD
 import { createCalendarEvent } from "../../components/Calendar/Calendar";
+import { useHistory } from 'react-router-dom';
 // createCalendarEvent("title", "startTime", "endTime", ['inv1','inv2'])
 
 export default function Friends() {
   const user = useContext(UserContext);
   const [friend, setFriend] = useState("");
   const [touchable, setTouchable] = useState([]);
-=======
-import { useHistory } from 'react-router-dom';
-
-export default function Friends() {
-  const user = useContext(UserContext);
-  const history = useHistory();
-  const [friend, setFriend] = useState('');
->>>>>>> 035769e5a1e026ed70f75bc3f363c2f2549f3801
   const [canAdd, setCanAdd] = useState(false);
   const [friendUid, setFriendUid] = useState("");
   const [friendsUid, setFriendsUid] = useState([]);
