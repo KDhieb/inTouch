@@ -4,25 +4,27 @@ import Navbar from "../../components/Navbar/Navbar";
 import { UserContext } from "../../providers/UserProvider";
 import { database } from "../../services/firebase";
 import { getTimes, overlap } from "../../components/Calendar/algo";
+import { createCalendarEvent } from "../../components/Calendar/Calendar";
+// createCalendarEvent("title", "startTime", "endTime", ['inv1','inv2'])
 
 export default function Friends() {
   const user = useContext(UserContext);
   const [friend, setFriend] = useState("");
+  const [touchable, setTouchable] = useState([]);
   const [canAdd, setCanAdd] = useState(false);
   const [friendUid, setFriendUid] = useState("");
   const [friendsUid, setFriendsUid] = useState([]);
   const [friends, setFriends] = useState([]);
 
-  console.log(overlap(getTimes(["U2h82SJHjas91ASA", "K92jnsA8scjchaus8shf"])));
+  // console.log(overlap(getTimes(["U2h82SJHjas91ASA", "K92jnsA8scjchaus8shf"])));
 
   useEffect(() => {
     database
-      .ref(user.uid)
+      .ref(localStorage.getItem("UID"))
       .child("friends")
       .on("value", (user) => {
         const data = user.val();
         if (data) {
-          console.log("17, DATA", data);
           let uidList = [];
           for (let friend of Object.keys(data)) {
             uidList.push(data[friend]);
@@ -31,6 +33,22 @@ export default function Friends() {
         }
       });
   }, []);
+
+
+  useEffect(() => {
+    setTouchable([{
+      title:"With x and z",
+      startTime:"startTime",
+      endTime:"end",
+      emails:['inv1','inv2'],
+    },
+    {
+      title:"With x and z and y",
+      startTime:"start1",
+      endTime:"end2",
+      emails:['inv1','inv2'],
+    }])
+  }, [touchable]);
 
   useEffect(() => {
     if (friendsUid) {
@@ -81,6 +99,7 @@ export default function Friends() {
         console.log(err);
       });
   };
+
 
   useEffect(() => {
     if (canAdd && friendUid.length > 0) {
@@ -135,7 +154,34 @@ export default function Friends() {
             );
           })}
         </div>
-        <div className={classes.right}>{/* for the recommendations */}</div>
+        <div className={classes.right}>
+        <div className={classes.rightTop}>
+            <h2 className={classes.title}>Touchables</h2>
+            <div className={classes.addTouchableContainer}>
+              <h4 className={classes.friendName}>Basketball with Jacky</h4>
+              <h4 className={classes.friendName}>Dec 5 1997</h4>
+              <button onClick={createCalendarEvent("title", "startTime", "endTime", ['inv1','inv2'])} className={classes.addBtn}>
+                Send invite
+              </button>
+              <div></div>
+            </div>
+            {touchable.map((touch, index) => {
+            return (
+              <div className={classes.addTouchableContainer}>
+              <h4 className={classes.friendName}>{touch.title}</h4>
+              <h4 className={classes.friendName}>{touch.startTime}</h4>
+              <h4 className={classes.friendName}>{touch.endTime}</h4>
+              <button onClick={createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} className={classes.addBtn}>
+                Send invite
+              </button>
+              <div></div>
+            </div>
+            );
+          })}
+
+
+          </div>
+        </div>
       </div>
 
       <p>Testing</p>
