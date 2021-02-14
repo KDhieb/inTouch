@@ -4,10 +4,12 @@ import Navbar from "../../components/Navbar/Navbar";
 import { UserContext } from "../../providers/UserProvider";
 import { database } from "../../services/firebase";
 import { getTimes, overlap } from "../../components/Calendar/algo";
+import { useHistory } from 'react-router-dom';
 
 export default function Friends() {
   const user = useContext(UserContext);
-  const [friend, setFriend] = useState("");
+  const history = useHistory();
+  const [friend, setFriend] = useState('');
   const [canAdd, setCanAdd] = useState(false);
   const [friendUid, setFriendUid] = useState("");
   const [friendsUid, setFriendsUid] = useState([]);
@@ -22,7 +24,7 @@ export default function Friends() {
       .on("value", (user) => {
         const data = user.val();
         if (data) {
-          console.log("17, DATA", data);
+          // console.log('17, DATA', data);
           let uidList = [];
           for (let friend of Object.keys(data)) {
             uidList.push(data[friend]);
@@ -70,8 +72,8 @@ export default function Friends() {
         console.log("DB", data);
         for (let user of Object.keys(data)) {
           if (data[user].email === friend) {
-            console.log("USERRR", user, friend, data[user]);
-            console.log("works!");
+            // console.log("USERRR", user, friend, data[user]);
+            // console.log("works!");
             setFriendUid(user);
             setCanAdd(true);
           }
@@ -86,10 +88,10 @@ export default function Friends() {
     if (canAdd && friendUid.length > 0) {
       setCanAdd(false);
       const uid = friendUid;
-      setFriend("");
-      setFriendUid("");
-      console.log("can add!");
-      database.ref(`/${user.uid}`).child("friends").push(uid);
+      setFriend('');
+      setFriendUid('');
+      // console.log('can add!')
+      database.ref(`/${user.uid}`).child('friends').push(uid);
     }
   }, [canAdd, friendUid]);
 
