@@ -184,7 +184,7 @@ export default function Friends() {
                       <p className={classes.touchTime}>{touch.startTime} - {touch.endTime}</p>
                       <h4 className={classes.touchTitle}>{touch.title}</h4>
                       <button 
-                        onClick={createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} 
+                        onClick={() => createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} 
                         className={classes.inviteBtn}
                       >
                         Send invite
