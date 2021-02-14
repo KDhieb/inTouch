@@ -10,34 +10,32 @@ import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { slotType, eventType } from "./data.js";
 import { UserContext } from "../../providers/UserProvider";
 
-export function getTimes(users, callback) {
-  let promise;
+export async function getTimes(users) {
   let times = [];
   let names = [];
   let emails = [];
   var dbRef = firebase.database().ref();
-  return dbRef.once("value").then(function(snapshot) {
-    const calendar = snapshot.val();
-    
-    for (let i in users) {
-      let slots = calendar[users[i]].freeSlots;
-      names.push(calendar[users[i]].name);
-      emails.push(calendar[users[i]].email);
-      for (let j in slots) {
-        times.push({
-          name: calendar[users[i]].name,
-          email: calendar[users[i]].email,
-          startDate: new Date(slots[j].startDate),
-          endDate: new Date(slots[j].endDate),
-          type: slots[j].eventTypeId
-        });
-      }
-    }
+  let snapshot = await dbRef.once("value");
   
-    promise = [callback(times), names, emails];
-    console.log(promise)
-    return promise
-  });
+  const calendar = snapshot.val();
+  
+  for (let i in users) {
+    let slots = calendar[users[i]].freeSlots;
+    names.push(calendar[users[i]].name);
+    emails.push(calendar[users[i]].email);
+    for (let j in slots) {
+      times.push({
+        name: calendar[users[i]].name,
+        email: calendar[users[i]].email,
+        startDate: new Date(slots[j].startDate),
+        endDate: new Date(slots[j].endDate),
+        type: slots[j].eventTypeId
+      });
+    }
+  }
+
+
+    return [times, names, emails]
 }
 
 export function overlap(dateRanges) {
@@ -88,5 +86,3 @@ export function overlap(dateRanges) {
   );
   return result;
 }
-
-console.log(getTimes(["4K2ddbkVhVa1Fbmbu8pJFSKB4cj1", "ImJUpetNVPU7MRnyZR21Xtn0Pe62"], overlap))
