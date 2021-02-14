@@ -6,10 +6,12 @@ function getTimes(users) {
         for (i in slots) {
             times.push({
                 startDate: new Date(slots[i].startDate),
-                endDate: new Date(slots[i].endDate)
+                endDate: new Date(slots[i].endDate),
+                type: slots[i].eventTypeID
             })
         }
     }
+    console.log(times)
     return times;
 }
 
@@ -30,12 +32,16 @@ function overlap(dateRanges) {
     var result = sorted.reduce((result, current, idx, arr) => {
       if (idx === 0) { return result; }
       var previous = arr[idx-1];
-    
+
+      var previousStart = previous.startDate.getTime();
       var previousEnd = previous.endDate.getTime();
       var currentStart = current.startDate.getTime();
-      var overlap = (previousEnd >= currentStart);
-    
-      if (overlap) {
+      var currentEnd = current.startDate.getTime();
+      var overlap = (previousEnd >= currentStart && previousStart <= currentEnd);
+      var compatible = (previous.type == 3 || current.type == 3) 
+      || (previous.type == current.type);
+
+      if (overlap && compatible) {
         result.overlap = true;
         result.ranges.push({
           startDate: new Date(Math.max.apply(null,[previous.startDate,current.startDate])),

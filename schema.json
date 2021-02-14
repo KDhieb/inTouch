@@ -5,12 +5,14 @@
         {
           "startDate": "Mon May 17 2021 03:30:00 GMT-0400 (EDT)",
           "endDate": "Mon May 17 2021 04:00:00 GMT-0400 (EDT)",
-          "description": "Description example 1"
+          "description": "Description example 1",
+          "eventTypeID": 1
         },
         {
           "startDate": "Tue May 18 2021 08:00:00 GMT-0400 (EDT)",
           "endDate": "Tue May 18 2021 08:33:00 GMT-0400 (EDT)",
-          "description": "Description  example2"
+          "description": "Description  example2",
+          "eventTypeID": 1
         }
       ],
       "interests": ["Soccer", "Basketball", "Going to restaurants", "Netflix"]
@@ -21,12 +23,14 @@
         {
           "startDate": "Tue May 18 2021 08:17:00 GMT-0400 (EDT)",
           "endDate": "Tue May 18 2021 09:00:00 GMT-0400 (EDT)",
-          "description": "Description example 3"
+          "description": "Description example 3",
+          "eventTypeID": 1
         },
         {
           "startDate": "Mon May 17 2021 03:40:00 GMT-0400 (EDT)",
           "endDate": "Mon May 17 2021 03:50:00 GMT-0400 (EDT)",
-          "description": "Description  example4"
+          "description": "Description  example4",
+          "eventTypeID": 2
         }
       ],
       "interests": ["Pizza", "Yoga", "Dogs", "Reading"]
