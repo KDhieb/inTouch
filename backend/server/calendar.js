@@ -126,6 +126,7 @@ function makeEvent(auth, appres, resource) {
   calendar.events.insert(
     {
       calendarId: "primary",
+      sendUpdates: 'all',
       resource: resource,
     },
     (err, res) => {

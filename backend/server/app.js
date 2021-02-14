@@ -52,18 +52,12 @@ app.post('/createEvent', (req, res) => {
             'dateTime': req.body.startTime,
         },end: {
             'dateTime': req.body.endTime,
-        },attendees : [
-            {
-                'email': req.body.email,
-                'responseStatus': 'needsAction'
-              },
-        ],
+        },
         sendUpdates: 'all',
     }
     //If thee are attendees
-    if (req.body.email){
-        var email = JSON.parse(req.body.email);
-        resource.attendees = email.map(function(e){
+    if (req.body.inviteList){
+        resource.attendees = req.body.inviteList.map(function(e){
             return(
                 {
                     'email': e,
