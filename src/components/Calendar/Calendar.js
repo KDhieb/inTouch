@@ -18,23 +18,28 @@ function Calendar() {
 
   const [newSource, setNewSource] = useState([]);
 
-  // const [googleCalData, setNewGoogleCalData] = useState([]);
+  const [googleCalData, setNewGoogleCalData] = useState([]);
 
-  // function getGoogleCalendarData() {
-  //   var request = require("request");
-  //   var options = {
-  //     method: "GET",
-  //     url: `http://b7d67b121fef.ngrok.io/getcalendars?access_token=${localStorage.getItem(
-  //       "token"
-  //     )}`,
-  //     headers: {},
-  //   };
-  //   request(options, function (error, response) {
-  //     if (error) throw new Error(error);
-  //     console.log(response.body);
-  //     setNewGoogleCalData(response.body.JSON);
-  //   });
-  // }
+  function getGoogleCalendarData() {
+    console.log("Getting caleendar from token", localStorage.getItem("token"))
+    var request = require("request");
+    var options = {
+      method: "GET",
+      url: `http://localhost:3001/getcalendars?access_token=${localStorage.getItem(
+        "token"
+      )}`,
+      headers: {},
+    };
+    request(options, function (error, response) {
+      if (error){
+        console.log("Failed to fetch", error)
+      } else{
+        console.log("Successfully fetched google calendar", response.body)
+        console.log(response.body);
+        setNewGoogleCalData(response.body.JSON);
+      }
+    });
+  }
 
   function getFreeSlotData() {
     console.log("new source running again");
@@ -61,7 +66,7 @@ function Calendar() {
 
   useEffect(() => {
     getFreeSlotData();
-    // getGoogleCalendarData();
+    getGoogleCalendarData();
   }, []);
 
   console.log("newsource");
