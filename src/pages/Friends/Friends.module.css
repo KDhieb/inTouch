@@ -1,0 +1,86 @@
+.container {
+  padding: 0 2rem 0 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+/* .left, .right {
+  background-color: aqua;
+} */
+
+.left {
+  width: 30%;
+  margin-right: 3.5rem;
+}
+
+.right {
+  width: 65%;
+}
+
+.leftTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title, .plus {
+  margin: 2rem 0 0.7rem 0;
+}
+
+.plus:hover {
+  cursor: pointer;
+}
+
+.friendContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.friendContainer:hover {
+  background-color: rgb(247, 245, 245);
+  cursor: pointer;
+}
+
+.friendName {
+  margin: 0 3rem 0 0;
+  padding: 0.5rem 0 0.5rem 0.7rem;
+}
+
+.addFriendContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgb(235, 235, 235);
+  padding: 0.3rem 0.35rem 0.3rem 0.35rem;
+  margin-bottom: 1.3rem;
+}
+
+.input {
+  font-size: 1rem;
+  border: none;
+  padding: 0.3rem 0.4rem 0.3rem 0.4rem;
+  width: 69%;
+  border-radius: 10px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.addBtn {
+  border: black;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 0.3rem 0.4rem 0.3rem 0.4rem;
+}
+
+.addBtn:hover {
+  cursor: pointer;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  transition: 0.3s;
+}

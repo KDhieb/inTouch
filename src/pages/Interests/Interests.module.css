@@ -61,7 +61,7 @@
 
 .addBtn {
   font-size: 1rem;
-  border: 0.2rem solid;
+  border: 0.15rem solid;
   border-color: black;
   background-color: white;
   color: black;
@@ -79,7 +79,7 @@
 
 .doneBtn {
   font-size: 1.2rem;
-  border: 0.2rem solid;
+  border: 0.15rem solid;
   border-color: black;
   background-color: black;
   color: white;
