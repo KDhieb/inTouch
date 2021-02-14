@@ -1,3 +1,34 @@
+import firebase, { database } from "../../services/firebase";
+
+const userId = "ImJUpetNVPU7MRnyZR21Xtn0Pe62";
+
+export const dataObject = async () => {
+  let dataObject = [];
+  const getFreeSlotData = async () => {
+    var query = firebase.database().ref(`${userId}/freeSlots`).orderByKey();
+
+    query.once("value").then(function (snapshot) {
+      snapshot.forEach(function (childSnapshot) {
+        var key = childSnapshot.key;
+        var childData = childSnapshot.val();
+        let data = {
+          startDate: childData.startDate,
+          endDate: childData.endDate,
+          text: childData.text,
+          description: childData.description,
+          eventTypeId: 3,
+          sourceTypeId: 2,
+        };
+        dataObject.push(data);
+      });
+    });
+    return dataObject;
+  };
+  return dataObject;
+};
+
+// getFreeSlotData();
+
 export const data = [
   {
     text: "Website Re-Design Plan",
@@ -5,18 +36,18 @@ export const data = [
     endDate: new Date("2021-05-17T18:30:00.000Z"),
   },
 
-  //   {
-  //     text: "Book Flights to San Fran for Sales Trip",
-  //     priorityId: 1,
-  //     startDate: new Date("2021-05-20T17:00:00.000Z"),
-  //     endDate: new Date("2021-05-20T19:00:00.000Z"),
-  //   },
-  //   {
-  //     text: "Install New Router in Dev Room",
-  //     priorityId: 1,
-  //     startDate: new Date("2021-05-16T20:00:00.000Z"),
-  //     endDate: new Date("2021-05-16T22:30:00.000Z"),
-  //   },
+  {
+    text: "Book Flights to San Fran for Sales Trip",
+    priorityId: 1,
+    startDate: new Date("2021-05-20T17:00:00.000Z"),
+    endDate: new Date("2021-05-20T19:00:00.000Z"),
+  },
+  {
+    text: "Install New Router in Dev Room",
+    priorityId: 1,
+    startDate: new Date("2021-05-16T20:00:00.000Z"),
+    endDate: new Date("2021-05-16T22:30:00.000Z"),
+  },
   //   {
   //     text: "Approve Personal Computer Upgrade Plan",
   //     priorityId: 2,
@@ -170,15 +201,38 @@ export const data = [
   //   },
 ];
 
-export const priorityData = [
+export const slotType = [
   {
-    text: "Low Priority",
+    text: "Google Calendar Event",
     id: 1,
     color: "#1e90ff",
   },
   {
-    text: "High Priority",
+    text: "My Free Time",
     id: 2,
     color: "#ff9747",
+  },
+  {
+    text: "Friends Free Time",
+    id: 3,
+    color: "#d3d3d3",
+  },
+];
+
+export const eventType = [
+  {
+    text: "Virtual",
+    id: 1,
+    color: "#ff9747",
+  },
+  {
+    text: "In-Person",
+    id: 2,
+    color: "#FF0000",
+  },
+  {
+    text: "Both",
+    id: 3,
+    color: "#800080",
   },
 ];
