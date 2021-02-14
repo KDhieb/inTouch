@@ -11,6 +11,7 @@
     "devextreme": "20.2.5",
     "devextreme-quill": "0.9.8",
     "devextreme-react": "20.2.5",
+    "devextreme-aspnet-data-nojquery": "2.6.1",
     "firebase": "^8.2.7",
     "http2": "^3.3.7",
     "react": "^17.0.1",
