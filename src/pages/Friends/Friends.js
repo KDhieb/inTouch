@@ -13,18 +13,20 @@ export default function Friends() {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    database.ref(user.uid).child('friends').on('value', (user) => {
-      const data = user.val();
-      if (data) {
-        console.log('17, DATA', data);
-        let uidList = [];
-        for (let friend of Object.keys(data)) {
-          uidList.push(data[friend]);
+    if (user) {
+      database.ref(user.uid).child('friends').on('value', (user) => {
+        const data = user.val();
+        if (data) {
+          console.log('17, DATA', data);
+          let uidList = [];
+          for (let friend of Object.keys(data)) {
+            uidList.push(data[friend]);
+          }
+          setFriendsUid(uidList);
         }
-        setFriendsUid(uidList);
-      }
-    })
-  }, []);
+      })
+    }
+  }, [user]);
 
   useEffect(() => {
     if (friendsUid) {
