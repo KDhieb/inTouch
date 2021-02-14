@@ -5,34 +5,38 @@ import Switch from "devextreme-react/switch";
 import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { slotType, eventType } from "./data.js";
 import { UserContext } from "../../providers/UserProvider";
+import context from "react-bootstrap/esm/AccordionContext";
 // import { getCalendars, createEvent } from "./GoogleCal";
 
-  export function createCalendarEvent(title, startTime, endTime, inviteList) {
-    console.log("Creating calendar event from token", localStorage.getItem("token"))
-    var request = require("request");
-    var options = {
-      method: "POST",
-      url: `http://localhost:3001/createEvent?access_token=${localStorage.getItem(
-        "token"
-      )}`,
-      json: {
-        title:title,
-        startTime:startTime,
-        endTime:endTime,
-        inviteList:inviteList, //I.e ['email1','email2']
-      },
-      headers: {},
-    };
-    request(options, function (error, response) {
-      if (error){
-        console.log("Failed to create event", error)
-      } else{
-        console.log("Successfully created event", response.body)
-        console.log(response.body);
-        console.log(response.body.JSON);
-      }
-    });
-  }
+export function createCalendarEvent(title, startTime, endTime, inviteList) {
+  console.log(
+    "Creating calendar event from token",
+    localStorage.getItem("token")
+  );
+  var request = require("request");
+  var options = {
+    method: "POST",
+    url: `http://localhost:3001/createEvent?access_token=${localStorage.getItem(
+      "token"
+    )}`,
+    json: {
+      title: title,
+      startTime: startTime,
+      endTime: endTime,
+      inviteList: inviteList, //I.e ['email1','email2']
+    },
+    headers: {},
+  };
+  request(options, function (error, response) {
+    if (error) {
+      console.log("Failed to create event", error);
+    } else {
+      console.log("Successfully created event", response.body);
+      console.log(response.body);
+      console.log(response.body.JSON);
+    }
+  });
+}
 
 function Calendar() {
   const user = useContext(UserContext);
@@ -63,6 +67,7 @@ function Calendar() {
       newArray.push(data);
     });
     // return newArray;
+
     console.log("NEW ARRAY");
     console.log(newArray);
     let final = newArray.concat(newSource);
@@ -91,7 +96,6 @@ function Calendar() {
       }
     });
   }
-
 
   function getFreeSlotData() {
     console.log("new source running again");
