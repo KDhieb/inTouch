@@ -11,12 +11,12 @@ import { slotType, eventType } from "./data.js";
 import { UserContext } from "../../providers/UserProvider";
 
 export function getTimes(users, callback) {
-  let result;
+  let promise;
   let times = [];
   let names = [];
   let emails = [];
   var dbRef = firebase.database().ref();
-  dbRef.once("value", (snapshot) => {
+  return dbRef.once("value").then(function(snapshot) {
     const calendar = snapshot.val();
     
     for (let i in users) {
@@ -33,10 +33,11 @@ export function getTimes(users, callback) {
         });
       }
     }
-    console.log([callback(times), names, emails])
-    result = [callback(times), names, emails];
+  
+    promise = [callback(times), names, emails];
+    console.log(promise)
+    return promise
   });
-  return result
 }
 
 export function overlap(dateRanges) {
