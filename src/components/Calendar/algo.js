@@ -10,17 +10,22 @@ import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { slotType, eventType } from "./data.js";
 import { UserContext } from "../../providers/UserProvider";
 
+
+
 export async function getTimes(users) {
   let times = [];
   let names = [];
   let emails = [];
+  let interests = []
   var dbRef = firebase.database().ref();
   let snapshot = await dbRef.once("value");
   
   const calendar = snapshot.val();
-  
+
+
   for (let i in users) {
     let slots = calendar[users[i]].freeSlots;
+    interests = interests.concat(calendar[users[i]].interests)
     names.push(calendar[users[i]].name);
     emails.push(calendar[users[i]].email);
     for (let j in slots) {
@@ -34,8 +39,11 @@ export async function getTimes(users) {
     }
   }
 
+    names.shift()
+    emails.shift()
 
-    return [times, names, emails]
+
+    return [times, names, emails, interests]
 }
 
 export function overlap(dateRanges) {

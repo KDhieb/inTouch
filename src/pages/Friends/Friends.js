@@ -56,7 +56,7 @@ export default function Friends() {
         console.log(overlaps.ranges);
         let display = overlaps.ranges.map((e) => {
           return ({
-            title: "ML event with " + details[1],
+            title: details[3][Math.floor(Math.random() * details[3].length)] + " with " + details[1],
             startTime: e.startDate,
             endTime: e.endDate,
             emails: details[2]
