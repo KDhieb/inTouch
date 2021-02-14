@@ -13,12 +13,6 @@ export default function Interests() {
   const [isHover, setIsHover] = useState(false);
   const [currIndex, setCurrIndex] = useState(null);
 
-  useEffect(() => {
-    if (!user) {
-      history.push("/sign-in");
-    }
-  }, [user]);
-
   const onInterestChange = (event) => {
     setInterest(event.target.value);
     // console.log(event.target.value);

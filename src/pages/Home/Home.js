@@ -3,6 +3,7 @@ import classes from './Home.module.css';
 // import { UserContext } from "../../providers/UserProvider";
 import { useHistory } from 'react-router-dom';
 // import { logOut } from "../../services/firebase";
+import { UserContext } from "../../providers/UserProvider";
 import Navbar from '../../components/Navbar/Navbar';
 import img1 from './img1.jpg';
 import img2 from './img2.jpg';
@@ -11,10 +12,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 
 export default function Home() {
+  const user = useContext(UserContext);
   const history = useHistory();
 
   const toDashboard = () => {
-    history.push('/dashboard');
+    if (user) {
+      history.push('/dashboard');
+    } else {
+      history.push('/sign-in');
+    }
   }
 
   return (
