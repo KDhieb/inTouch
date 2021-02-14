@@ -1,0 +1,35 @@
+{
+  "Users": {
+    "U2h82SJHjas91ASA": {
+      "freeSlots": [
+        {
+          "startDate": "Mon May 17 2021 03:30:00 GMT-0400 (EDT)",
+          "endDate": "Mon May 17 2021 04:00:00 GMT-0400 (EDT)",
+          "description": "Description example 1"
+        },
+        {
+          "startDate": "Mon May 17 2021 12:00:00 GMT-0400 (EDT)",
+          "endDate": "Mon May 17 2021 12:30:00 GMT-0400 (EDT)",
+          "description": "Description  example2"
+        }
+      ],
+      "interests": ["Soccer", "Basketball", "Going to restaurants", "Netflix"]
+    },
+
+    "K92jnsA8scjchaus8shf": {
+      "freeSlots": [
+        {
+          "startDate": "Mon May 17 2021 03:30:00 GMT-0400 (EDT)",
+          "endDate": "Mon May 17 2021 04:00:00 GMT-0400 (EDT)",
+          "description": "Description example 1"
+        },
+        {
+          "startDate": "Mon May 17 2021 12:00:00 GMT-0400 (EDT)",
+          "endDate": "Mon May 17 2021 12:30:00 GMT-0400 (EDT)",
+          "description": "Description  example2"
+        }
+      ],
+      "interests": ["Pizza", "Yoga", "Dogs", "Reading"]
+    }
+  }
+}
