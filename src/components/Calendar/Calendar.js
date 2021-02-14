@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import firebase, { database } from "../../services/firebase";
-
 import "whatwg-fetch";
 import Switch from "devextreme-react/switch";
 import Scheduler, { Resource, View } from "devextreme-react/scheduler";
 import { slotType, eventType } from "./data.js";
-import CustomStore from "devextreme/data/custom_store";
-// import * as AspNetData from "devextreme-aspnet-data-nojquery";
 import { UserContext } from "../../providers/UserProvider";
+// import { getCalendars, createEvent } from "./GoogleCal";
 
 function Calendar() {
   const user = useContext(UserContext);
@@ -17,7 +15,26 @@ function Calendar() {
   if (user) {
     userId = user.uid;
   }
+
   const [newSource, setNewSource] = useState([]);
+
+  // const [googleCalData, setNewGoogleCalData] = useState([]);
+
+  // function getGoogleCalendarData() {
+  //   var request = require("request");
+  //   var options = {
+  //     method: "GET",
+  //     url: `http://b7d67b121fef.ngrok.io/getcalendars?access_token=${localStorage.getItem(
+  //       "token"
+  //     )}`,
+  //     headers: {},
+  //   };
+  //   request(options, function (error, response) {
+  //     if (error) throw new Error(error);
+  //     console.log(response.body);
+  //     setNewGoogleCalData(response.body.JSON);
+  //   });
+  // }
 
   function getFreeSlotData() {
     console.log("new source running again");
@@ -44,13 +61,14 @@ function Calendar() {
 
   useEffect(() => {
     getFreeSlotData();
+    // getGoogleCalendarData();
   }, []);
 
-  console.log("outside");
+  console.log("newsource");
 
-  console.log(newSource);
+  // console.log(newSource);
 
-  const currentDate = new Date(2021, 4, 21);
+  const currentDate = new Date();
 
   console.log(currentDate);
   const views = ["week"];
@@ -58,7 +76,7 @@ function Calendar() {
   const addNewSlot = (timeslot) => {
     var ts = timeslot.appointmentData;
     var text = ts.text;
-    var description = ts.description;
+    var description = ts.description || "No description";
     var startDate = ts.startDate;
     var endDate = ts.endDate;
     var eventTypeId = ts.eventTypeId;
@@ -74,7 +92,6 @@ function Calendar() {
       eventTypeId: eventTypeId,
     };
 
-    console.log(`${text} ${description} ${startDate} ${endDate}`);
     const newSlotRef = firebase.database().ref(`${userId}/freeSlots`);
     newSlotRef.push(newData);
 
@@ -193,12 +210,6 @@ function Calendar() {
         onAppointmentDeleted={onDelete}
         onAppointmentUpdating={update}
       >
-        <Resource
-          fieldExpr="sourceTypeId"
-          allowMultiple={false}
-          dataSource={slotType}
-          label="Source"
-        />
 
         <Resource
           fieldExpr="eventTypeId"
