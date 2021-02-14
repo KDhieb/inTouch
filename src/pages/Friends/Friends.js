@@ -37,21 +37,21 @@ export default function Friends() {
 
   useEffect(() => {
     setTouchable([{
-      title:"With x and z",
-      startTime:"06:00 14 Feb 2020",
-      endTime:"12:00 14 Feb 2020",
-      emails:['inv1','inv2'],
+      title:"🍽️    Dinner with Jacky ",
+      startTime:"2021-02-15T18:00:00+04:00",
+      endTime:"2021-02-15T20:00:00+04:00",
+      emails:['inv1'],
     },
     {
-      title:"With x and z",
-      startTime:"06:00 14 Feb 2020",
-      endTime:"12:00 14 Feb 2020",
-      emails:['inv1','inv2'],
+      title:"🎥   Movie night with Gabriella",
+      startTime:"2021-02-15T18:00:00+04:00",
+      endTime:"2021-02-15T20:00:00+04:00",
+      emails:['inv1'],
     },
     {
-      title:"With x and z and y",
-      startTime:"start1",
-      endTime:"end2",
+      title:"⛸️   Ice skating with Jacky and Gabriella",
+      startTime:"2021-02-16T13:00:00+04:00",
+      endTime:"2021-02-16T16:00:00+04:00",
       emails:['inv1','inv2'],
     }])
   }, []);
@@ -179,9 +179,12 @@ export default function Friends() {
             <div className={ classes.touchablesWrap }>
               {
                 touchable.map((touch, index) => {
+                  const startDate = new Date(touch.startTime).toDateString()
+                  const startTime = new Date(touch.startTime).toTimeString().slice(0,5);
+                  const endTime = new Date(touch.endTime).toTimeString().slice(0,5);
                   return (
                     <div className={classes.addTouchableContainer}>
-                      <p className={classes.touchTime}>{touch.startTime} - {touch.endTime}</p>
+                      <p className={classes.touchTime}>{startDate}          {startTime}-{endTime}</p>
                       <h4 className={classes.touchTitle}>{touch.title}</h4>
                       <button 
                         onClick={() => createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} 
