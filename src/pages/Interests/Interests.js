@@ -53,8 +53,7 @@ export default function Interests() {
     database.ref(`/${user.uid}`).update({
       email: user.email,
       name: user.displayName,
-      interests,
-      friends: []
+      interests
     });
     history.push("/dashboard");
   };

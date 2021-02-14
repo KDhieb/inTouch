@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.midContainer {
+  position: absolute;
+  top: 53vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  width: 80vw;
+  text-align: center;
+
+}
+
+.text {
+  color: white;
+  font-weight: 900;
+  font-size: 5rem;
+}
+
+.btn {
+  border: black;
+  font-size: 1.5rem;
+  background-color: black;
+  color: white;
+  font-weight: 500;
+  border-radius: 15px;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: rgb(46, 46, 46);
+  color: white;
+  transition: 0.3s;
+}
