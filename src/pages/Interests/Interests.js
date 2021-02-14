@@ -50,7 +50,7 @@ export default function Interests() {
   }
 
   const toDashboard = () => {
-    database.ref(`/${user.uid}`).set({
+    database.ref(`/${user.uid}`).update({
       email: user.email,
       name: user.displayName,
       interests
