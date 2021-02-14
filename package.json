@@ -10,7 +10,7 @@
     "devexpress-diagram": "2.0.11",
     "devexpress-gantt": "2.0.18",
     "devextreme": "20.2.5",
-    "devextreme-aspnet-data-nojquery": "^2.8.0",
+    "devextreme-aspnet-data-nojquery": "2.6.1",
     "devextreme-quill": "0.9.8",
     "devextreme-react": "20.2.5",
     "dompurify": "^2.2.6",
