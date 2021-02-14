@@ -20,12 +20,14 @@
 .nav {
   font-weight: 500;
   margin-right: 2rem;
+  margin-bottom: 0;
   width: 5rem;
 }
 
 .navDB {
   font-weight: 500;
   margin-right: 2rem;
+  margin-bottom: 0;
   width: 7rem;
 }
 
@@ -35,12 +37,17 @@
   cursor: pointer;
 }
 
+.logo {
+  margin-bottom: 0;
+}
+
 .logo:hover {
   cursor: pointer;
 }
 
 .user {
   margin-right: 1rem;
+  margin-bottom: 0;
 }
 
 .buttons {
