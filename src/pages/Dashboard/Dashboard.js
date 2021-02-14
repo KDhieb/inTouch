@@ -8,11 +8,11 @@ export default function Dashboard() {
   const user = useContext(UserContext);
   const history = useHistory();
 
-  useEffect(() => {
-    if (!user) {
-      history.push('/sign-in');
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     history.push('/sign-in');
+  //   }
+  // }, [user]);
   
   return (
     <div>

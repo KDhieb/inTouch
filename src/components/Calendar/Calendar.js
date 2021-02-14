@@ -47,8 +47,32 @@ function Calendar() {
 
   const [googleCalData, setNewGoogleCalData] = useState([]);
 
+  const [finalArray, setFinalArray] = useState([]);
+
+  function cleanGoogleJSON() {
+    let newArray = [];
+    googleCalData.forEach((element) => {
+      let data = {
+        startDate: new Date(element.start).toString(),
+        endDate: new Date(element.end).toString(),
+        text: element.summary.toString(),
+        description: "GOOGLE CALENDAR EVENT",
+        eventTypeId: 0,
+      };
+      console.log(element.start);
+      newArray.push(data);
+    });
+    // return newArray;
+    console.log("NEW ARRAY");
+    console.log(newArray);
+    let final = newArray.concat(newSource);
+    console.log("FINAL");
+    console.log(final);
+    setFinalArray(final);
+  }
+
   function getGoogleCalendarData() {
-    console.log("Getting calendar from token", localStorage.getItem("token"))
+    console.log("Getting calendar from token", localStorage.getItem("token"));
     var request = require("request");
     var options = {
       method: "GET",
@@ -58,12 +82,12 @@ function Calendar() {
       headers: {},
     };
     request(options, function (error, response) {
-      if (error){
-        console.log("Failed to fetch", error)
-      } else{
-        console.log("Successfully fetched google calendar", response.body)
+      if (error) {
+        console.log("Failed to fetch", error);
+      } else {
+        console.log("Successfully fetched google calendar", response.body);
         console.log(response.body);
-        setNewGoogleCalData(response.body.JSON);
+        setNewGoogleCalData(JSON.parse(response.body));
       }
     });
   }
@@ -96,6 +120,12 @@ function Calendar() {
     getFreeSlotData();
     getGoogleCalendarData();
   }, []);
+
+  useEffect(() => {
+    if (newSource && googleCalData) {
+      cleanGoogleJSON();
+    }
+  }, [newSource, googleCalData]);
 
   console.log("newsource");
 
@@ -229,8 +259,8 @@ function Calendar() {
   return (
     <div id="scheduler">
       <Scheduler
-        timeZone="America/Los_Angeles"
-        dataSource={newSource}
+        // timeZone="America/Los_Angeles"
+        dataSource={finalArray}
         views={views}
         showAllDayPanel={false}
         defaultCurrentView="week"
@@ -243,7 +273,6 @@ function Calendar() {
         onAppointmentDeleted={onDelete}
         onAppointmentUpdating={update}
       >
-
         <Resource
           fieldExpr="eventTypeId"
           allowMultiple={false}
