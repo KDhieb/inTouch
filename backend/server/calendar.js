@@ -119,6 +119,7 @@ function makeEvent(auth, appres, resource){
     }, (err, res) => {
       if (err){
         return console.log('The google calendar API returned an error: ' + err);
+        appres.send("Error", 404);
       } else {
         appres.send("Saved");
         console.log('Event was saved');
