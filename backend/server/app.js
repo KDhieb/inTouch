@@ -52,8 +52,25 @@ app.post('/createEvent', (req, res) => {
             'dateTime': req.body.startTime,
         },end: {
             'dateTime': req.body.endTime,
-        },
+        },attendees : [
+            {
+                'email': req.body.email,
+                'responseStatus': 'needsAction'
+              },
+        ],
         sendUpdates: 'all',
+    }
+    //If thee are attendees
+    if (req.body.email){
+        var email = JSON.parse(req.body.email);
+        resource.attendees = email.map(function(e){
+            return(
+                {
+                    'email': e,
+                    'responseStatus': 'needsAction'
+                }
+            )
+        })
     }
     console.log("Creating event", resource)
     calendar.createEvent(req.query.access_token, resource, res)
