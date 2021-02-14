@@ -3,6 +3,9 @@ import classes from './SignIn.module.css';
 import { UserContext } from '../../providers/UserProvider';
 import { signInWithGoogle } from "../../services/firebase";
 import { useHistory } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
+import google from './googlesign.png';
+import { database } from '../../services/firebase';
 
 export default function SignUp() {
   const user = useContext(UserContext);
@@ -10,16 +13,31 @@ export default function SignUp() {
 
   useEffect(() => {
     if (user) {
-      history.push('/interests');
+      const userRef = database.ref(user.uid);
+      userRef.get()
+      .then((data) => {
+        if (!data.val().interests) {
+          // console.log('USERRRR HERE!', data.val());
+          history.push('/interests');
+        } else {
+          history.push('/dashboard');
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
     }
   }, [user]);
 
   return (
-    <div className={ classes.container }>
-      <div className={ classes.contents}>
-        <h1>Hi, Welcome to inTouch!</h1>
-        <button onClick={signInWithGoogle}>Sign in with Google</button>
-      </div>
-    </div>    
+    <div>
+      <Navbar/>
+      <div className={ classes.container }>
+        <div className={ classes.contents}>
+          <p className={ classes.title }>Hi, Welcome to inTouch!</p>
+          <img onClick={signInWithGoogle} src={ google } width="250px" className={ classes.google }/>
+        </div>
+      </div>    
+    </div>
   )
 }

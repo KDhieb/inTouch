@@ -3,9 +3,11 @@ import classes from './Friends.module.css';
 import Navbar from '../../components/Navbar/Navbar';
 import { UserContext } from "../../providers/UserProvider";
 import { database } from "../../services/firebase";
+import { useHistory } from 'react-router-dom';
 
 export default function Friends() {
   const user = useContext(UserContext);
+  const history = useHistory();
   const [friend, setFriend] = useState('');
   const [canAdd, setCanAdd] = useState(false);
   const [friendUid, setFriendUid] = useState('');
@@ -17,7 +19,7 @@ export default function Friends() {
       database.ref(user.uid).child('friends').on('value', (user) => {
         const data = user.val();
         if (data) {
-          console.log('17, DATA', data);
+          // console.log('17, DATA', data);
           let uidList = [];
           for (let friend of Object.keys(data)) {
             uidList.push(data[friend]);
@@ -59,11 +61,11 @@ export default function Friends() {
     database.ref('/').get()
     .then((snapshot) => {
       const data = snapshot.val();
-      console.log('DB', data);
+      // console.log('DB', data);
       for (let user of Object.keys(data)) {
         if (data[user].email === friend) {
-          console.log('USERRR', user, friend, data[user]);
-          console.log('works!');
+          // console.log('USERRR', user, friend, data[user]);
+          // console.log('works!');
           setFriendUid(user);
           setCanAdd(true);
         }
@@ -80,7 +82,7 @@ export default function Friends() {
       const uid = friendUid;
       setFriend('');
       setFriendUid('');
-      console.log('can add!')
+      // console.log('can add!')
       database.ref(`/${user.uid}`).child('friends').push(uid);
     }
   }, [canAdd, friendUid]);
