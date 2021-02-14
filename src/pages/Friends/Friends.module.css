@@ -35,6 +35,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-content: center;
 }
 
 .friendContainer:hover {
@@ -45,6 +46,10 @@
 .friendName {
   margin: 0 3rem 0 0;
   padding: 0.5rem 0 0.5rem 0.7rem;
+}
+
+.friendEmail {
+  margin: 0;
 }
 
 .addFriendContainer {

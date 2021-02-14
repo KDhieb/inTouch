@@ -5,6 +5,7 @@
   height: 12vh;
   /* background-color: aqua; */
   padding: 0 2rem 0 2rem;
+  align-items: center;
 }
 
 .rightNav {
