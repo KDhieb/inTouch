@@ -110,7 +110,7 @@ export default function Friends() {
               return (
                 <div className={ classes.friendContainer } styles={ index === 0 || index === friends.length - 1 ? { border: 'none' } : { borderBottom: '2px black', borderColor: 'black' }}>
                   <h4 className={ classes.friendName }>{ friend.name }</h4>
-                  <p>{ friend.email }</p>
+                  <p className={ classes.friendEmail }>{ friend.email }</p>
                 </div>
               )
             })
