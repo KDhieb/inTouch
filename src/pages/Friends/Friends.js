@@ -5,7 +5,7 @@ import { UserContext } from "../../providers/UserProvider";
 import { database } from "../../services/firebase";
 import { getTimes, overlap } from "../../components/Calendar/algo";
 import { createCalendarEvent } from "../../components/Calendar/Calendar";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 // createCalendarEvent("title", "startTime", "endTime", ['inv1','inv2'])
 
 export default function Friends() {
@@ -34,7 +34,6 @@ export default function Friends() {
         }
       });
   }, []);
-
 
   useEffect(() => {
     setTouchable([{
@@ -101,15 +100,14 @@ export default function Friends() {
       });
   };
 
-
   useEffect(() => {
     if (canAdd && friendUid.length > 0) {
       setCanAdd(false);
       const uid = friendUid;
-      setFriend('');
-      setFriendUid('');
-      console.log('can add!')
-      database.ref(`/${user.uid}`).child('friends').push(uid);
+      setFriend("");
+      setFriendUid("");
+      // console.log('can add!')
+      database.ref(`/${user.uid}`).child("friends").push(uid);
     }
   }, [canAdd, friendUid]);
 
@@ -156,12 +154,18 @@ export default function Friends() {
           })}
         </div>
         <div className={classes.right}>
-        <div className={classes.rightTop}>
+          <div className={classes.rightTop}>
             <h2 className={classes.title}>Touchables</h2>
             {/* <div className={classes.addTouchableContainer}>
               <h4 className={classes.friendName}>Basketball with Jacky</h4>
               <h4 className={classes.friendName}>Dec 5 1997</h4>
-              <button onClick={createCalendarEvent("title", "startTime", "endTime", ['inv1','inv2'])} className={classes.addBtn}>
+              <button
+                onClick={createCalendarEvent("title", "startTime", "endTime", [
+                  "inv1",
+                  "inv2",
+                ])}
+                className={classes.addBtn}
+              >
                 Send invite
               </button>
               <div></div>
@@ -184,7 +188,6 @@ export default function Friends() {
                   );
               })}
             </div>
-
           </div>
         </div>
       </div>
