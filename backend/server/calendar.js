@@ -93,11 +93,7 @@ function listEvents(auth, appres) {
   calendar.events.list(
     {
       calendarId: "primary",
-<<<<<<< HEAD
       maxResults: 150,
-=======
-      maxResults: 100,
->>>>>>> a0dc54db55642e12afce117b1c8f3ffa314158e2
       singleEvents: true,
       orderBy: "startTime",
       timeMin: "2021-01-03T10:00:00-07:00",
