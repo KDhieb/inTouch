@@ -4,15 +4,17 @@ import cancel from '../../static/cancel.svg';
 import { UserContext } from "../../providers/UserProvider";
 import Navbar from '../../components/Navbar/Navbar';
 import { database } from '../../services/firebase';
+import { useHistory } from 'react-router-dom';
 
 export default function Profile() {
   const user = useContext(UserContext);
+  const history = useHistory();
   const [interest, setInterest] = useState('');
   const [interests, setInterests] = useState([]);
   const [isHover, setIsHover] = useState(false);
   const [currIndex, setCurrIndex] = useState(null);
   const userRef = database.ref(user.uid);
-
+  
   useEffect(() => {
     userRef.on('value', (user) => {
       const data = user.val();
