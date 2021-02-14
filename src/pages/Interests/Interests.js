@@ -21,7 +21,7 @@ export default function Interests() {
 
   const onInterestChange = (event) => {
     setInterest(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   const addInterest = () => {
@@ -54,6 +54,7 @@ export default function Interests() {
       email: user.email,
       name: user.displayName,
       interests,
+      friends: []
     });
     history.push("/dashboard");
   };
