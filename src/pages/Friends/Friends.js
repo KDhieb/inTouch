@@ -16,8 +16,17 @@ export default function Friends() {
   const [friendUid, setFriendUid] = useState("");
   const [friendsUid, setFriendsUid] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [inviteFriends, setInviteFriends] = useState([]);
 
   // console.log(overlap(getTimes(["U2h82SJHjas91ASA", "K92jnsA8scjchaus8shf"])));
+
+  useEffect(() => {
+    if (user) {
+      let newArr = [...inviteFriends];
+      newArr.push(user.uid);
+      setInviteFriends(newArr);
+    }
+  }, [user]);
 
   useEffect(() => {
     database
@@ -36,41 +45,47 @@ export default function Friends() {
   }, []);
 
   useEffect(() => {
-    async function fetchOverlap(){
-      let details = await getTimes(["4K2ddbkVhVa1Fbmbu8pJFSKB4cj1", "ImJUpetNVPU7MRnyZR21Xtn0Pe62"])
-      let overlaps = overlap(details[0]);
-      console.log(overlaps.ranges);
-      let display = overlaps.ranges.map((e) => {
-        return ({
-          title: "ML event with " + details[1],
-          startTime: e.startDate,
-          endTime: e.endDate,
-          emails: details[2]
+    if (inviteFriends.length > 1) {
+      console.log(inviteFriends);
+      async function fetchOverlap(){
+        let details = await getTimes(inviteFriends)
+        let editArr = [...inviteFriends];
+        editArr.pop();
+        setInviteFriends(editArr);
+        let overlaps = overlap(details[0]);
+        console.log(overlaps.ranges);
+        let display = overlaps.ranges.map((e) => {
+          return ({
+            title: "ML event with " + details[1],
+            startTime: e.startDate,
+            endTime: e.endDate,
+            emails: details[2]
+          })
         })
-      })
-      console.log(display)
-      setTouchable(display)
-      // setTouchable([{
-      //   title:"🍽️  Dinner with Jacky ",
-      //   startTime:"2021-02-15T18:00:00+04:00",
-      //   endTime:"2021-02-15T20:00:00+04:00",
-      //   emails:['inv1'],
-      // },
-      // {
-      //   title:"🎥   Movie night with Gabriella",
-      //   startTime:"2021-02-15T18:00:00+04:00",
-      //   endTime:"2021-02-15T20:00:00+04:00",
-      //   emails:['inv1'],
-      // },
-      // {
-      //   title:"⛸️   Ice skating with Jacky and Gabriella",
-      //   startTime:"2021-02-16T13:00:00+04:00",
-      //   endTime:"2021-02-16T16:00:00+04:00",
-      //   emails:['inv1','inv2'],
-      // }])
+        console.log(display)
+        setTouchable(display)
+        // setTouchable([{
+        //   title:"🍽️  Dinner with Jacky ",
+        //   startTime:"2021-02-15T18:00:00+04:00",
+        //   endTime:"2021-02-15T20:00:00+04:00",
+        //   emails:['inv1'],
+        // },
+        // {
+        //   title:"🎥   Movie night with Gabriella",
+        //   startTime:"2021-02-15T18:00:00+04:00",
+        //   endTime:"2021-02-15T20:00:00+04:00",
+        //   emails:['inv1'],
+        // },
+        // {
+        //   title:"⛸️   Ice skating with Jacky and Gabriella",
+        //   startTime:"2021-02-16T13:00:00+04:00",
+        //   endTime:"2021-02-16T16:00:00+04:00",
+        //   emails:['inv1','inv2'],
+        // }])
+      }
+      fetchOverlap();
     }
-    fetchOverlap();
-  }, []);
+  }, [inviteFriends]);
 
   useEffect(() => {
     if (friendsUid) {
@@ -133,6 +148,12 @@ export default function Friends() {
     }
   }, [canAdd, friendUid]);
 
+  const inviteFriend = (friend) => {
+    let newInvitees = [...inviteFriends];
+    newInvitees.push(friend);
+    setInviteFriends(newInvitees);
+  }
+
   return (
     <div>
       <Navbar />
@@ -157,6 +178,7 @@ export default function Friends() {
 
             <div></div>
           </div>
+          {/* <p>{ JSON.stringify(inviteFriends)}</p> */}
           {/* <p>{ JSON.stringify(friendsUid) }</p> */}
           {/* <p>{ JSON.stringify(friends) }</p> */}
           {friends.map((friend, index) => {
@@ -168,6 +190,7 @@ export default function Friends() {
                     ? { border: "none" }
                     : { borderBottom: "2px black", borderColor: "black" }
                 }
+                onClick={ () => inviteFriend(friend.uid) }
               >
                 <h4 className={classes.friendName}>{friend.name}</h4>
                 <p className={classes.friendEmail}>{friend.email}</p>
