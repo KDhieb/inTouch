@@ -39,8 +39,8 @@ export default function Friends() {
   useEffect(() => {
     setTouchable([{
       title:"With x and z",
-      startTime:"startTime",
-      endTime:"end",
+      startTime:"06:00 14 Feb 2020",
+      endTime:"12:00 14 Feb 2020",
       emails:['inv1','inv2'],
     },
     {
@@ -49,7 +49,7 @@ export default function Friends() {
       endTime:"end2",
       emails:['inv1','inv2'],
     }])
-  }, [touchable]);
+  }, []);
 
   useEffect(() => {
     if (friendsUid) {
@@ -108,7 +108,7 @@ export default function Friends() {
       const uid = friendUid;
       setFriend('');
       setFriendUid('');
-      // console.log('can add!')
+      console.log('can add!')
       database.ref(`/${user.uid}`).child('friends').push(uid);
     }
   }, [canAdd, friendUid]);
@@ -158,34 +158,36 @@ export default function Friends() {
         <div className={classes.right}>
         <div className={classes.rightTop}>
             <h2 className={classes.title}>Touchables</h2>
-            <div className={classes.addTouchableContainer}>
+            {/* <div className={classes.addTouchableContainer}>
               <h4 className={classes.friendName}>Basketball with Jacky</h4>
               <h4 className={classes.friendName}>Dec 5 1997</h4>
               <button onClick={createCalendarEvent("title", "startTime", "endTime", ['inv1','inv2'])} className={classes.addBtn}>
                 Send invite
               </button>
               <div></div>
+            </div> */}
+            <div className={ classes.touchablesWrap }>
+              {
+                touchable.map((touch, index) => {
+                  return (
+                    <div className={classes.addTouchableContainer}>
+                      <p className={classes.friendName}>{touch.startTime} - {touch.endTime}</p>
+                      <h4 className={classes.friendName}>{touch.title}</h4>
+                      <button 
+                        onClick={createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} 
+                        className={classes.addBtn}
+                      >
+                        Send invite
+                      </button>
+                    <div></div>
+                  </div>
+                  );
+              })}
             </div>
-            {touchable.map((touch, index) => {
-            return (
-              <div className={classes.addTouchableContainer}>
-              <h4 className={classes.friendName}>{touch.title}</h4>
-              <h4 className={classes.friendName}>{touch.startTime}</h4>
-              <h4 className={classes.friendName}>{touch.endTime}</h4>
-              <button onClick={createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} className={classes.addBtn}>
-                Send invite
-              </button>
-              <div></div>
-            </div>
-            );
-          })}
-
 
           </div>
         </div>
       </div>
-
-      <p>Testing</p>
     </div>
   );
 }

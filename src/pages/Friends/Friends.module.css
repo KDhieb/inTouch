@@ -65,15 +65,14 @@
 }
 
 .addTouchableContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: rgb(0, 204, 153);
+  width: 48%;
+  background-color: rgb(230, 230, 230);
   padding: 0.3rem 0.35rem 0.3rem 0.35rem;
   margin-bottom: 1.3rem;
   border: 2px;
   padding: 10px;
-  border-radius: 25px;
+  border-radius: 15px;
+  margin-right: 1rem;
 }
 
 .input {
@@ -103,4 +102,14 @@ input:focus {
   background-color: rgb(46, 46, 46);
   color: white;
   transition: 0.3s;
+}
+
+.touchablesWrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.time {
+  font-size: 1rem;
 }
