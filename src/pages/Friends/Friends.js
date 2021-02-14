@@ -43,6 +43,12 @@ export default function Friends() {
       emails:['inv1','inv2'],
     },
     {
+      title:"With x and z",
+      startTime:"06:00 14 Feb 2020",
+      endTime:"12:00 14 Feb 2020",
+      emails:['inv1','inv2'],
+    },
+    {
       title:"With x and z and y",
       startTime:"start1",
       endTime:"end2",
@@ -175,11 +181,11 @@ export default function Friends() {
                 touchable.map((touch, index) => {
                   return (
                     <div className={classes.addTouchableContainer}>
-                      <p className={classes.friendName}>{touch.startTime} - {touch.endTime}</p>
-                      <h4 className={classes.friendName}>{touch.title}</h4>
+                      <p className={classes.touchTime}>{touch.startTime} - {touch.endTime}</p>
+                      <h4 className={classes.touchTitle}>{touch.title}</h4>
                       <button 
                         onClick={createCalendarEvent(touch.title, touch.startTime, touch.endTime, touch.emails)} 
-                        className={classes.addBtn}
+                        className={classes.inviteBtn}
                       >
                         Send invite
                       </button>
