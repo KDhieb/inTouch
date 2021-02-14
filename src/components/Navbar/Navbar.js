@@ -28,6 +28,11 @@ export default function Navbar() {
     history.push('/profile');
   }
 
+  const signOut = () => {
+    logOut();
+    history.push('/');
+  }
+
   return (
     <div className={ classes.container }>
       <h1 className={ classes.logo } onClick={ toHome }>inTouch</h1>
@@ -39,7 +44,7 @@ export default function Navbar() {
         <div className={ classes.buttons }>
           {
             user 
-            ? <button onClick={ logOut } className={ classes.logout }>Logout</button>
+            ? <button onClick={ signOut } className={ classes.logout }>Logout</button>
             : <button onClick= { toSignIn } className={ classes.signIn }>Sign In</button>
           }
         </div>
