@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# inTouch - TreeHacks 2021 Submission
+## A social media proof of concept made to take the hassle out of keeping in touch.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How we built it
 
-## Available Scripts
+inTouch is built with a serverless architecture using React. Our application authentication is handled using Google's Firebase identity and authentication APIs. Our database is hosted on Firebase realtime database, and we have a separate node.js API server for calculating optimal touchables™. When such an event is found, we use Google calendar APIs in order to create a meeting and invite the other participants.
 
-In the project directory, you can run:
+## Is the site live?
+Not yet. Currently, our app is only authorized to access Google Calendar data from registered testers and admin. However, you are free to use the code yourself while using your own personal API keys (From Firebase and Google). Just make sure to properly set them up as environment variables.
 
-### `yarn start`
+## Gallery
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Schedule dashboard
+![intouch3](https://user-images.githubusercontent.com/47509883/108675231-7fae5980-74b4-11eb-93db-8b0367ba174b.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Add free timeblock
+![intouch1](https://user-images.githubusercontent.com/47509883/108675312-a10f4580-74b4-11eb-84db-9e1f05a8c203.png)
 
-### `yarn test`
+## Friends page
+![intouch2](https://user-images.githubusercontent.com/47509883/108675351-b1272500-74b4-11eb-8311-3d2f0bcda7fc.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Profile page
+![intouch 4](https://user-images.githubusercontent.com/47509883/108675402-c2703180-74b4-11eb-8e89-756705548d88.png)
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
