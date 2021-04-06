@@ -1,6 +1,16 @@
 # inTouch - TreeHacks 2021 Submission
 ## A social media proof of concept made to take the hassle out of keeping in touch.
 
+## What it does
+
+inTouch is a social media platform that allows users to find common free availlabilities among their friends. The features include:
+- Importing your Google Calendar events to your account
+- Creating "Free" timeblocks in our scheduler to mark all your future availlabilities, and set your event preferences (virtual, in person, or both)
+- Seting your personal interests on your profile page (example: tennis, restaurants, running, etc.)
+- Adding your friends, and our platform will find all overlapping free timeblocks of friends that match yours based on similar event preferences
+- Clicking on multiple friends to view common group availlabilities
+- Sending Google Calendar invites to all selected friends (our site will also suggest events based on your interests!)
+
 ## How we built it
 
 inTouch is built with a serverless architecture using React. Our application authentication is handled using Google's Firebase identity and authentication APIs. Our database is hosted on Firebase realtime database, and we have a separate node.js API server for calculating optimal touchables™. When such an event is found, we use Google calendar APIs in order to create a meeting and invite the other participants.
